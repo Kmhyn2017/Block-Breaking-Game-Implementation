@@ -37,7 +37,7 @@
 |코드 작성 완료|논문 보고서 작성|리플릿 작성|동영상 촬영|-|-|-|
 
 ### 참고 문헌  
-[1] https://wikidocs.net/102871   
-[2] https://velog.io/@tonic523/javascript-%EB%B2%BD%EB%8F%8C%EA%B9%A8%EA%B8%B0-%EA%B2%8C%EC%9E%84-%EB%A6%AC%EB%B7%B0
-[3] https://p5js.org/ko/reference/#/p5/random
+[1] Collisions with the distance of the shape. https://wikidocs.net/102871 (accessed May 19, 2022).   
+[2] class reference. https://p5js.org/ko/reference/#/p5/class (accessed May 19, 2022).
+[3] random reference. https://p5js.org/ko/reference/#/p5/random (accessed May 19, 2022).
 
