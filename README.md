@@ -38,6 +38,6 @@
 
 ### 참고 문헌  
 [1] Collisions with the distance of the shape. https://wikidocs.net/102871 (accessed May 19, 2022).   
-[2] class reference. https://p5js.org/ko/reference/#/p5/class (accessed May 19, 2022).
+[2] class reference. https://p5js.org/ko/reference/#/p5/class (accessed May 19, 2022).  
 [3] random reference. https://p5js.org/ko/reference/#/p5/random (accessed May 19, 2022).
 
