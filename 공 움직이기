@@ -5,11 +5,11 @@ let y_dir = 1;
 function setup() {
   createCanvas(500, 500);
   // 공 객체 만들기
-  myBall = new ball(250,250,16,240);
+  myBall = new ball(250,250,16,'rgb(255,204,153)');
 }
 
 function draw() {
-  background(153,255,204)
+  background('rgb(224,255,230)')
   // 공이 x좌표에서 벗어 났을떄
   if(myBall.x >=488){
     x_dir *= -1;
