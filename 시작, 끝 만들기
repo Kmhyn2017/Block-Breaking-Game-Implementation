@@ -1,0 +1,231 @@
+let myBall;
+let myBar;
+let myBlock;
+let x_dir = 1;
+let y_dir = 1;
+let block_f = 0;
+let score = 0;
+let x_speed = 0;
+let basic_speed = 6;
+let y_speed = basic_speed;
+let play = false;
+let main = true;
+let end = false;
+let delayTime;
+function setup() {
+  createCanvas(500, 500);
+  // 공 객체 만들기
+  myBall = new ball(250,250,16,'rgb(255,204,153)');
+  myBar = new bar(250, 450, 120, 6);
+  myBlock = new block('rgb(0,153,51)');
+  myBlock.block_pos(200,200);
+}
+function draw() {
+  background('rgb(224,255,230)')
+  // play가 true로 바뀔시 실행
+  if(play){
+    wall_bounce();
+    bar_bounce();
+    block_bounce();
+    // 공 움직임, 속도 조절
+    myBall.ball_move(x_speed*x_dir,y_speed*y_dir);
+    myBar.bar_move(mouseX);
+  }
+  // main이 true이니 무조건 처음 실행
+  if(main){
+    // 마우스 클릭시, 플레이 시작, 메인 끔, 엔드 끔
+    if(mouseIsPressed){
+      play = true;
+      main = false;
+      end = false;
+      init_game(); //공 위치 
+    }
+    textSize(40);
+    fill('rgb(255,102, 204)');
+    textStyle(BOLD);
+    text("Please press mouse.",55,250);
+  }
+  // end가 true일 시, 텍스트 실행 및 점수 공개
+  if(end){
+    if(mouseIsPressed){
+      play = false;
+      main = true;
+      end = false;
+      delayTime(300);
+    }
+    textSize(40);
+    fill('rgb(255,102, 204)');
+    textStyle(BOLD);
+    text('Game Over!',135,230);
+    text('Score : ',153,280);
+    text(score,290,280);
+  }
+}
+function bar_bounce(){
+  // 공이 패들위에 닿앗을때 튕김
+  if((myBar.x-(myBar.len/2)<=myBall.x+9)&&(myBar.x+(myBar.len/2)>=myBall.x-9)){ 
+    if((myBar.y-3<=myBall.y+9)&&(myBar.y+3>=myBall.y-9)){
+      y_dir*=-1; // 반대로 튕김
+      //패들에 공이 닿는 면에 따라서 공이 튕겨저 나오는 방향을 조종할 수 있도록하는 것입니다.
+      if(myBar.x-(myBar.len/2)+(myBar.len/8)>=myBall.x){
+        x_dir = -1;
+        x_speed = 4;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*2>=myBall.x){
+        x_dir = -1;
+        x_speed = 3;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*3>=myBall.x){
+        x_dir = -1;
+        x_speed = 2;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*4>=myBall.x){
+        x_dir = -1;
+        x_speed = 1;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*5>=myBall.x){
+        x_dir = 1;
+        x_speed = 1;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*6>=myBall.x){
+        x_dir = 1;
+        x_speed = 2;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*7>=myBall.x){
+        x_dir = 1;
+        x_speed = 3;
+      }
+      else if(myBar.x-(myBar.len/2)+(myBar.len/8)*7<=myBall.x){
+        x_dir = 1;
+        x_speed = 4;
+      }
+    }
+  }
+}
+function wall_bounce(){
+  // 공이 x좌표에서 벗어 났을떄
+  if(myBall.x >=488){
+    x_dir *= -1;
+  }
+  if(myBall.x <=12){
+    x_dir *= -1;
+  }
+  // 공이 y좌표에서 벗어 났을때
+  // 공이 y밑 좌표 밑에 닿을 시 점수 초기화
+  if(myBall.y >=488){
+    y_dir *= -1;
+    play = false;
+    main = false;
+    end = true;
+  }
+  if(myBall.y <=12){
+    y_dir *= -1;
+  }
+}
+function block_bounce(){
+  //랜덤 생성된 블럭이 공에 닿앗을떄 flag값을 1로 변경
+  if(block_f ==0){
+      myBlock.block_pos(int(random(450)), int(random(280)));
+      block_f =1;
+  }
+  // 블럭이 공과 닿을 시 튕김
+  if((myBlock.x<=myBall.x+16)&&(myBlock.x+50>=myBall.x+16)&&(myBlock.y<=myBall.y)&&(myBlock.y+20>=myBall.y)){
+    block_f=0;
+    x_dir*=-1;
+    score +=100;
+  }
+  if((myBlock.x<=myBall.x-16)&&(myBlock.x+50>=myBall.x-16)&&(myBlock.y<=myBall.y)&&(myBlock.y+20>=myBall.y)){
+    block_f=0;
+    x_dir*=-1;
+    score +=100;
+
+  }
+  if((myBlock.x<=myBall.x)&&(myBlock.x+50>=myBall.x)&&(myBlock.y<=myBall.y-16)&&(myBlock.y+20>=myBall.y-16)){
+    block_f=0;
+    y_dir*=-1;
+    score +=100;
+
+  }
+  if((myBlock.x<=myBall.x)&&(myBlock.x+50>=myBall.x)&&(myBlock.y<=myBall.y+16)&&(myBlock.y+20>=myBall.y+16)){
+    block_f=0;
+    y_dir*=-1;
+    score +=100;
+
+  }
+  fill('rgb(102,102,255)') //텍스트 색상
+  textSize(20);
+  textStyle(NORMAL);
+  text('Score : ',0, 39);
+  text(score, 62, 40); // 텍스트 위치
+  //점수가 300점마다 속도 1씩 증가
+  y_speed = (score/300)+basic_speed;
+  text('Speed : ',0, 60);
+  text(y_speed, 68, 60);
+  myBlock.block_draw();
+}
+//공 위치 초기화 
+function init_game(){
+  x_dir = 1;
+  y_dir = 1;
+  block_f = 0;
+  score = 0;
+  x_speed = 0;
+  y_speed = basic_speed;
+  myBall.x = 250;
+  myBall.y = 250;
+}
+// 공 클래스
+class ball{
+  constructor(x, y, r, c){
+      this.x =x; // 공 x위치
+      this.y =y; // 공 y위치
+      this.r =r; // 공 반지름
+      this.c =c; // 공 색상
+  }
+  ball_move(x, y){
+    this.x += x; //공이 x좌표로 움직임
+    this.y += y; // 공이 y좌표로 움직임
+    this.ball_draw();
+  }
+  ball_draw(){
+    strokeWeight(1);
+    fill(this.c); // 공 색상 채우기
+    ellipse(this.x, this.y,this.r, this.r);
+  }
+}
+
+//패들 클래스
+class bar{
+  constructor(x, y, len, wei){
+    this.x = x; // 패들 x 위치
+    this.y = y; // 패들 y 위치
+    this.len = len; // 패들 길이
+    this.wei = wei; // 패들 두께
+  }
+  bar_draw(){
+    strokeWeight(this.wei);
+    // 마우스 커서기준으로 임의의 길이에서 왼쪽으로 반, 오른쪽으로 반 나눔
+    line(this.x-(this.len/2), this.y, this.x+(this.len/2), this.y); 
+  }
+  bar_move(x){
+    this.x = x;
+    this.bar_draw();
+  }
+}
+
+// 블럭 클래스
+class block{
+  constructor(c){
+    this.c = c;
+  }
+  // 블록 생성 장소
+  block_pos(x, y){
+    this.x = x;
+    this.y = y;
+  }
+  block_draw(){
+    strokeWeight(1);
+    fill(this.c);
+    rect(this.x, this.y, 50,20);
+  }
+}
