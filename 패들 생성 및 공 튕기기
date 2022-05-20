@@ -16,7 +16,7 @@ function draw() {
   bar_bounce();
   // 공 움직임, 속도 조절
   myBall.ball_move(2*x_dir,3*y_dir);
-  myBar.bar_move(mouseX);
+  myBar.bar_move(mouseX); // 마우스로 패들 움직임
 }
 function bar_bounce(){
   // 공이 패들위에 닿앗을때 튕김
