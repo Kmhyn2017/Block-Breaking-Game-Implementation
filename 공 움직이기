@@ -1,0 +1,42 @@
+let myBall;
+let x_dir = 1;
+let y_dir = 1;
+
+function setup() {
+  createCanvas(500, 500);
+  myBall = new ball(250,250,16,240);
+}
+
+function draw() {
+  background(153,255,204)
+  if(myBall.x >=488){
+    x_dir *= -1;
+  }
+  if(myBall.x <=12){
+    x_dir *= -1;
+  }
+  if(myBall.y >=488){
+    y_dir *= -1;
+  }
+  if(myBall.y <=12){
+    y_dir *= -1;
+  }
+  myBall.ball_move(2*x_dir,3*y_dir);
+}
+class ball{
+  constructor(x, y, r, c){
+      this.x =x;
+      this.y =y;
+      this.r =r;
+      this.c =c;
+  }
+  ball_move(x, y){
+    this.x += x;
+    this.y += y;
+    this.ball_draw();
+  }
+  ball_draw(){
+    fill(this.c);
+    ellipse(this.x, this.y,this.r, this.r);
+  }
+}
