@@ -6,12 +6,12 @@ let y_dir = 1;
 function setup() {
   createCanvas(500, 500);
   // 공 객체 만들기
-  myBall = new ball(250,250,16,240);
+  myBall = new ball(250,250,16,'rgb(255,204,153)');
   myBar = new bar(250, 450, 80, 6);
 }
 
 function draw() {
-  background(153,255,204)
+  background('rgb(224,255,230)')
   wall_bounce();
   bar_bounce();
   // 공 움직임, 속도 조절
