@@ -4,39 +4,43 @@ let y_dir = 1;
 
 function setup() {
   createCanvas(500, 500);
+  // 공 객체 만들기
   myBall = new ball(250,250,16,240);
 }
 
 function draw() {
   background(153,255,204)
+  // 공이 x좌표에서 벗어 났을떄
   if(myBall.x >=488){
     x_dir *= -1;
   }
   if(myBall.x <=12){
     x_dir *= -1;
   }
+  // 공이 y좌표에서 벗어 났을때
   if(myBall.y >=488){
     y_dir *= -1;
   }
   if(myBall.y <=12){
     y_dir *= -1;
   }
+  // 공 움직임, 속도 조절
   myBall.ball_move(2*x_dir,3*y_dir);
 }
 class ball{
   constructor(x, y, r, c){
-      this.x =x;
-      this.y =y;
-      this.r =r;
-      this.c =c;
+      this.x =x; // 공 x위치
+      this.y =y; // 공 y위치
+      this.r =r; // 공 반지름
+      this.c =c; // 공 색상
   }
   ball_move(x, y){
-    this.x += x;
-    this.y += y;
+    this.x += x; //공이 x좌표로 움직임
+    this.y += y; // 공이 y좌표로 움직임
     this.ball_draw();
   }
   ball_draw(){
-    fill(this.c);
+    fill(this.c); // 공 색상 채우기
     ellipse(this.x, this.y,this.r, this.r);
   }
 }
