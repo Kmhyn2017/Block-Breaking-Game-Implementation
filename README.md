@@ -24,7 +24,7 @@
 7. 속도 실시간 표시
 
 ### 예상 결과물
-![1](https://user-images.githubusercontent.com/92089428/169038126-d52f9240-30cb-4923-a333-4aba26ee6055.PNG)
+![IMG_4289](https://user-images.githubusercontent.com/92089428/169644116-373d5611-1c9a-490c-b0d2-19f9b43977b9.jpg)
 
 활용방안  
 게임 구현을 통해 비슷한 원리인 로켓으로 비행기 격추 게임이나 2D 슈팅 게임을 구현할 수 있다. 
