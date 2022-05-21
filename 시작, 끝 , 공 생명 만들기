@@ -5,13 +5,13 @@ let x_dir = 1;
 let y_dir = 1;
 let block_f = 0;
 let score = 0;
+let lives = 3;
 let x_speed = 0;
 let basic_speed = 6;
 let y_speed = basic_speed;
 let play = false;
 let main = true;
 let end = false;
-let delayTime;
 function setup() {
   createCanvas(500, 500);
   // 공 객체 만들기
@@ -27,6 +27,7 @@ function draw() {
     wall_bounce();
     bar_bounce();
     block_bounce();
+    ball_lives();
     // 공 움직임, 속도 조절
     myBall.ball_move(x_speed*x_dir,y_speed*y_dir);
     myBar.bar_move(mouseX);
@@ -51,7 +52,7 @@ function draw() {
       play = false;
       main = true;
       end = false;
-      delayTime(300);
+      //delay(300);
     }
     textSize(40);
     fill('rgb(255,102, 204)');
@@ -60,6 +61,13 @@ function draw() {
     text('Score : ',153,280);
     text(score,290,280);
   }
+}
+function ball_lives(){
+  fill('rgb(102,102,255)') //텍스트 색상
+  textSize(20);
+  textStyle(NORMAL);
+  text('Lives : ',430, 39);
+  text(lives, 490, 39);
 }
 function bar_bounce(){
   // 공이 패들위에 닿앗을때 튕김
@@ -114,9 +122,12 @@ function wall_bounce(){
   // 공이 y밑 좌표 밑에 닿을 시 점수 초기화
   if(myBall.y >=488){
     y_dir *= -1;
+    lives-=1;
+    if(lives==0){
     play = false;
     main = false;
     end = true;
+    }
   }
   if(myBall.y <=12){
     y_dir *= -1;
@@ -163,12 +174,13 @@ function block_bounce(){
   text(y_speed, 68, 60);
   myBlock.block_draw();
 }
-//공 위치 초기화 
+//공 위치와  변수 초기화 
 function init_game(){
   x_dir = 1;
   y_dir = 1;
   block_f = 0;
   score = 0;
+  lives = 3;
   x_speed = 0;
   y_speed = basic_speed;
   myBall.x = 250;
@@ -229,3 +241,4 @@ class block{
     rect(this.x, this.y, 50,20);
   }
 }
+
